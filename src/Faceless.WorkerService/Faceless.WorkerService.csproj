@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Faceless.Application\Faceless.Application.csproj" />
       <ProjectReference Include="..\Faceless.Domain\Faceless.Domain.csproj" />
       <ProjectReference Include="..\Faceless.Infrastructure\Faceless.Infrastructure.csproj" />
       <ProjectReference Include="..\Faceless.Repositories\Faceless.Repositories.csproj" />

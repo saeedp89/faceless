@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -13,5 +13,8 @@
   <ProjectReference Include="..\Faceless.Domain\Faceless.Domain.csproj" />
   <ProjectReference Include="..\Faceless.Infrastructure\Faceless.Infrastructure.csproj" />
   <ProjectReference Include="..\Faceless.Repositories\Faceless.Repositories.csproj" />
+</ItemGroup>
+<ItemGroup>
+  <Folder Include="Extensions\" />
 </ItemGroup>
 </Project>

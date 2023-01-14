@@ -2,5 +2,5 @@
 
 public interface IProductCrawler
 {
-    void StartCrawling();
+    Task DoCrawlAsync(CancellationToken token);
 }

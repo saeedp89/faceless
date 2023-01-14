@@ -2,6 +2,7 @@
 using Faceless.Domain.Entities;
 using Faceless.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Faceless.Repositories;
 
@@ -22,8 +23,8 @@ public class FacelessBaseRepository<T> : IFacelessBaseRepository<T> where T : Ba
 
     public async Task AddAllAsync(IEnumerable<T> entities)
     {
-        var tasks = entities.Select(AddAsync);
-        await Task.WhenAll(tasks);
+        await _facelessDb.Set<T>().AddRangeAsync(entities);
+        await _facelessDb.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(T entity)
@@ -41,9 +42,17 @@ public class FacelessBaseRepository<T> : IFacelessBaseRepository<T> where T : Ba
         await _facelessDb.SaveChangesAsync();
     }
 
-    public async Task<T> GetById(Guid id) =>
+    public async Task DeleteAllAsync(List<Guid> ids)
+    {
+        foreach (var id in ids)
+        {
+            await DeleteAsync(id);
+        }
+    }
+
+    public async Task<T?> GetById(Guid id) =>
         await _facelessDb.Set<T>().FindAsync(id);
 
-    public async Task<IEnumerable<T>> GetAll() =>
-        await _facelessDb.Set<T>().ToListAsync();
+    public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate) =>
+        await _facelessDb.Set<T>().Where(predicate).ToListAsync();
 }

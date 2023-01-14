@@ -5,31 +5,26 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{35330876-83E1-46F0-BA79-9C2867B06C25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Cli", "src\Faceless.Cli\Faceless.Cli.csproj", "{A20EF4E1-3F18-447D-B161-A6F186C80AE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Cli", "src\Faceless.Cli\Faceless.Cli.csproj", "{A20EF4E1-3F18-447D-B161-A6F186C80AE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C4883A1E-0BBF-4D96-AEBF-838E073E02C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Tests", "test\Faceless.Tests\Faceless.Tests.csproj", "{2BDCD605-1905-4E4C-9D2A-EC2D2545198C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Tests", "test\Faceless.Tests\Faceless.Tests.csproj", "{2BDCD605-1905-4E4C-9D2A-EC2D2545198C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Application", "src\Faceless.Application\Faceless.Application.csproj", "{C09D8FD1-D05C-4F94-8365-02ED7FDB9832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Application", "src\Faceless.Application\Faceless.Application.csproj", "{C09D8FD1-D05C-4F94-8365-02ED7FDB9832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Domain", "src\Faceless.Domain\Faceless.Domain.csproj", "{B532D707-59A9-4787-BD31-B335EBA2B055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Domain", "src\Faceless.Domain\Faceless.Domain.csproj", "{B532D707-59A9-4787-BD31-B335EBA2B055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Infrastructure", "src\Faceless.Infrastructure\Faceless.Infrastructure.csproj", "{7CA512FF-B6F2-4256-AA68-25081614F09A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Infrastructure", "src\Faceless.Infrastructure\Faceless.Infrastructure.csproj", "{7CA512FF-B6F2-4256-AA68-25081614F09A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.Repositories", "src\Faceless.Repositories\Faceless.Repositories.csproj", "{A6802E73-3393-4744-B36A-B15B210F1700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.Repositories", "src\Faceless.Repositories\Faceless.Repositories.csproj", "{A6802E73-3393-4744-B36A-B15B210F1700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.WorkerService", "src\Faceless.WorkerService\Faceless.WorkerService.csproj", "{7B74FF90-35E4-4358-8F11-D0B7801D66B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faceless.MigrationHost", "src\Faceless.MigrationHost\Faceless.MigrationHost.csproj", "{3BF2BB7F-0C22-493B-B63C-4B608B60AF39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Faceless.WorkerService", "src\Faceless.WorkerService\Faceless.WorkerService.csproj", "{7B74FF90-35E4-4358-8F11-D0B7801D66B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A20EF4E1-3F18-447D-B161-A6F186C80AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,10 +55,9 @@ Global
 		{7B74FF90-35E4-4358-8F11-D0B7801D66B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B74FF90-35E4-4358-8F11-D0B7801D66B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B74FF90-35E4-4358-8F11-D0B7801D66B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BF2BB7F-0C22-493B-B63C-4B608B60AF39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BF2BB7F-0C22-493B-B63C-4B608B60AF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BF2BB7F-0C22-493B-B63C-4B608B60AF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BF2BB7F-0C22-493B-B63C-4B608B60AF39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A20EF4E1-3F18-447D-B161-A6F186C80AE5} = {35330876-83E1-46F0-BA79-9C2867B06C25}
@@ -73,6 +67,8 @@ Global
 		{7CA512FF-B6F2-4256-AA68-25081614F09A} = {35330876-83E1-46F0-BA79-9C2867B06C25}
 		{A6802E73-3393-4744-B36A-B15B210F1700} = {35330876-83E1-46F0-BA79-9C2867B06C25}
 		{7B74FF90-35E4-4358-8F11-D0B7801D66B5} = {35330876-83E1-46F0-BA79-9C2867B06C25}
-		{3BF2BB7F-0C22-493B-B63C-4B608B60AF39} = {35330876-83E1-46F0-BA79-9C2867B06C25}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2571723-CD1F-4CAB-B851-10F74A8C74AA}
 	EndGlobalSection
 EndGlobal

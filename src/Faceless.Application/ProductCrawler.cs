@@ -1,6 +1,7 @@
 ﻿using Faceless.Domain.Entities;
 using Faceless.Infrastructure;
 using Faceless.Repositories.Abstractions;
+using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -11,15 +12,18 @@ public class ProductCrawler : IProductCrawler
     private readonly IProductRepository _productRepository;
     private readonly IProductPicturesRepository _galleryRepository;
     private readonly IPictureRepository _pictureRepository;
+    private readonly ILogger<ProductCrawler> _logger;
 
-    public ProductCrawler(IProductRepository productRepository, IProductPicturesRepository galleryRepository, IPictureRepository pictureRepository)
+    public ProductCrawler(IProductRepository productRepository, IProductPicturesRepository galleryRepository,
+        IPictureRepository pictureRepository, ILogger<ProductCrawler> logger)
     {
         _productRepository = productRepository;
         _galleryRepository = galleryRepository;
         _pictureRepository = pictureRepository;
+        _logger = logger;
     }
 
-    public void StartCrawling()
+    public async Task DoCrawlAsync(CancellationToken token)
     {
         List<string> listOfProductUrlsToCrawl = new();
         var pageNumber = 0;
@@ -50,23 +54,54 @@ public class ProductCrawler : IProductCrawler
         foreach (var productUrl in listOfProductUrlsToCrawl)
         {
             IWebDriver driver = NavigateToProductPage(productUrl);
-            var title = GetProductTitle(driver);
-            var price = GetProductPrice(driver);
-            var size = GetProductSize(driver);
-            var weight = GetProductWeight(driver);
-            var gallery = ExtractGallery(driver);
-            var id = productUrl.Split('-').Last().Trim();
-            var product = new Product(title, price, size, weight, id);
-            _productRepository.AddAsync(product).GetAwaiter().GetResult();
-            var pics=gallery.Select(e=>new Pic)
+            string title, price, size, weight = string.Empty;
+            try
+            {
+                title = GetProductTitle(driver);
+                price = GetProductPrice(driver);
+                size = GetProductSize(driver);
+                weight = GetProductWeight(driver);
+
+                var gallery = ExtractGallery(driver);
+                var id = productUrl.Split('-').Last().Trim();
+                var previouslyAddedProduct =await _productRepository.GetByTechnoIdAsync(id);
+                if (previouslyAddedProduct == null)
+                {
+                    var product = new Product(title, price, size, weight, id);
+                    await _productRepository.AddAsync(product);
+                    var pics = gallery.Select(e => new Picture(e, e, "application.jpg"));
+                    await _pictureRepository.AddAllAsync(pics);
+                    var productPics = pics
+                        .Select(pic => new ProductPicture(product.Id, pic.Id)).ToList();
+                    await _galleryRepository.AddAllAsync(productPics);
+                }
+                else
+                {
+                    var allProductPics = await _galleryRepository.GetAll(x => x.ProductId == previouslyAddedProduct.Id);
+
+                    await _galleryRepository.DeleteAllAsync(allProductPics.Select(x=>x.Id).ToList());
+
+                }
+                
+
+            }
+            catch(Exception e)
+            {
+         
+                continue;
+            }
+            finally
+            {
+                driver.Quit();
+                driver.Dispose();
+            }
         }
     }
 
     private IWebDriver NavigateToProductPage(string productUrl)
     {
-        var chromeOptions = new ChromeOptions();
-        chromeOptions.AddArguments(new[] { "headless" });
-        var driver = new ChromeDriver(chromeOptions);
+
+        var driver = GetHeadlessDriver();
         driver.Navigate().GoToUrl(productUrl);
         return driver;
     }
@@ -84,9 +119,21 @@ public class ProductCrawler : IProductCrawler
         return validUrls.ToList();
     }
 
+    private IWebDriver GetHeadlessDriver()
+    {
+        var chromeOptions = new ChromeOptions();
+        chromeOptions.AddArguments(
+            new[]
+            {
+                "headless"
+            }
+        );
+        var driver = new ChromeDriver(chromeOptions);
+        return driver;
+    }
     private IWebDriver NavigateToCategoryProductsPage(string url)
     {
-        var driver = new ChromeDriver();
+        var driver = GetHeadlessDriver();
         driver.Navigate().GoToUrl(url);
         return driver;
     }
@@ -141,10 +188,8 @@ public class ProductCrawler : IProductCrawler
         var nextDivSection = price.FindElements(By.TagName("div")).ToList();
         return nextDivSection.Any(x => x.GetAttribute("class").Contains("unavailable"))
             ? "0"
-            : driver.FindElement(By.XPath("//*[@id=\"productP1\"]/div[3]/div[2]/div/h6/span[1]")).Text;
+            : driver.FindElement(By.XPath("//*[@id=\"productP1\"]/div[3]/div[3]/div[2]/h6/span[1]")).Text;
     }
-
-
 
 
     string GetCategoryProductsUrlByPageNumber(int pageNumber)

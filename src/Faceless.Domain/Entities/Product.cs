@@ -1,6 +1,6 @@
-﻿namespace Faceless.Domain;
+﻿namespace Faceless.Domain.Entities;
 
-public record Product
-    (string Title, decimal Price, decimal Weight, decimal Length, decimal Width, string Type) : BaseEntity
+public record Product(string Title, string Price, string Size,
+    string Weight, string TechnoLifeProductId) : BaseEntity
 {
 }

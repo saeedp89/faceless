@@ -1,4 +1,4 @@
-﻿namespace Faceless.Domain;
+﻿namespace Faceless.Domain.Entities;
 
 public record ProductPicture : BaseEntity
 {

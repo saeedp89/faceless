@@ -1,20 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-Faceless.WorkerService-066FC3AA-88AF-4257-8DE5-5B9F8D28BFE5</UserSecretsId>
     </PropertyGroup>
+
     <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlserver" Version="7.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
-
     </ItemGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\Faceless.Domain\Faceless.Domain.csproj" />
+      <ProjectReference Include="..\Faceless.Infrastructure\Faceless.Infrastructure.csproj" />
+      <ProjectReference Include="..\Faceless.Repositories\Faceless.Repositories.csproj" />
     </ItemGroup>
 </Project>

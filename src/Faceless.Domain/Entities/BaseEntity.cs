@@ -1,4 +1,4 @@
-﻿namespace Faceless.Domain;
+﻿namespace Faceless.Domain.Entities;
 
 public abstract record BaseEntity(Guid Id, DateTimeOffset CreatedAt)
 {

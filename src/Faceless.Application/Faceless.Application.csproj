@@ -5,5 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+<ItemGroup>
+  <PackageReference Include="Selenium.WebDriver" Version="4.7.0" />
+  <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="109.0.5414.7400" /> 
+</ItemGroup>
+<ItemGroup>
+  <ProjectReference Include="..\Faceless.Domain\Faceless.Domain.csproj" />
+  <ProjectReference Include="..\Faceless.Infrastructure\Faceless.Infrastructure.csproj" />
+  <ProjectReference Include="..\Faceless.Repositories\Faceless.Repositories.csproj" />
+</ItemGroup>
 </Project>
